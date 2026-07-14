@@ -5,7 +5,6 @@ import { useEffect } from "react";
 // Easily manage multiple tracking IDs here
 const CONFIG = {
   googleAnalyticsIds: ["G-XVLEDXG07G"], // You can add multiple GA IDs here in the future
-  metaPixelIds: ["1010234605103457"], // Add or remove Meta Pixel IDs here
 };
 
 export default function ThirdPartyScripts() {
@@ -45,31 +44,7 @@ export default function ThirdPartyScripts() {
         document.head.appendChild(gaInline);
       }
 
-      // 2. Initialize Meta Pixels dynamically
-      if (CONFIG.metaPixelIds.length > 0) {
-        (function(f,b,e,v,n,t,s) {
-          if(f.fbq) return;
-          n=f.fbq=function(){
-            n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments);
-          };
-          if(!f._fbq) f._fbq=n;
-          n.push=n;
-          n.loaded=!0;
-          n.version='2.0';
-          n.queue=[];
-          t=b.createElement(e);
-          t.async=!0;
-          t.src=v;
-          s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s);
-        })(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-        CONFIG.metaPixelIds.forEach(id => {
-          window.fbq('init', id);
-        });
-        window.fbq('track', 'PageView');
-      }
-    };
 
     const triggerEvents = ["mouseover", "keydown", "touchstart", "scroll"];
 
@@ -84,20 +59,5 @@ export default function ThirdPartyScripts() {
     };
   }, []);
 
-  if (CONFIG.metaPixelIds.length === 0) return null;
-
-  return (
-    <noscript>
-      {CONFIG.metaPixelIds.map((id) => (
-        <img
-          key={id}
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1`}
-          alt=""
-        />
-      ))}
-    </noscript>
-  );
+  return null;
 }
