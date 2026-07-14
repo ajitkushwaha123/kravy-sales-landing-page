@@ -43,8 +43,7 @@ export default function ThirdPartyScripts() {
         `;
         document.head.appendChild(gaInline);
       }
-
-
+    };
 
     const triggerEvents = ["mouseover", "keydown", "touchstart", "scroll"];
 
