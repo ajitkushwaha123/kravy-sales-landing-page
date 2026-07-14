@@ -63,6 +63,7 @@ function SuccessPageContent() {
       });
 
       if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("track", "PageView");
         const purchaseValue = parseFloat(reg.amount || registrationDetails?.plan?.price || 0);
         window.fbq("track", "Purchase", {
           value: purchaseValue,
